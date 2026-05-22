@@ -352,4 +352,44 @@ document.addEventListener('DOMContentLoaded', () => {
         init();
         animate();
     }
+
+    // Contact Page — Product Prefill from URL param
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const product = urlParams.get('product');
+        if (product) {
+            const subjectField = document.getElementById('subject');
+            if (subjectField) {
+                subjectField.value = 'Inquiry for ' + product;
+            }
+        }
+
+        // Web3Forms submission handler
+        contactForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Inject the user's name dynamically into the hidden email subject
+            const userName = document.getElementById('name').value;
+            const hiddenSubject = contactForm.querySelector('input[name="subject"]');
+            if (hiddenSubject && userName) {
+                hiddenSubject.value = `New Inquiry from ${userName} - Eynexa Pharma`;
+            }
+
+            const formData = new FormData(contactForm);
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Inquiry submitted successfully!');
+                contactForm.reset();
+            } else {
+                alert('Something went wrong!');
+                console.log(result);
+            }
+        });
+    }
 });
