@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.eynexa.in/sitemap.xml
+Sitemap: https://eynexa.vercel.app/sitemap.xml
