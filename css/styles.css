@@ -413,13 +413,18 @@ footer {
 
 /* Page hero banner (non-homepage) */
 .page-banner {
-    background: var(--bg-gray);
+    background: linear-gradient(135deg, var(--bg-gray) 0%, rgba(0, 168, 150, 0.03) 100%);
     text-align: center;
-    padding: 4rem 0;
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .page-banner .section-title {
     margin-bottom: 1rem;
+}
+
+.page-banner .section-title::after {
+    display: none !important;
 }
 
 .page-banner p {
@@ -458,50 +463,68 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 4rem;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .about-overview-text {
-    flex: 1;
+    flex: 1.2;
     min-width: 300px;
 }
 
 .about-overview-text h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 1.5rem;
     color: var(--primary-blue);
+    position: relative;
 }
 
 .about-overview-text p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    line-height: 1.7;
 }
 
-/* About mission/vision box */
-.mission-box {
+.mission-vision-wrapper {
     flex: 1;
     min-width: 300px;
-    background: var(--bg-gray);
-    padding: 3rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--accent-teal);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.mission-box h3 {
+/* About mission/vision card */
+.mission-card {
+    background: #FFFFFF;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-teal);
+    transition: var(--transition);
+}
+
+.mission-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.mission-card h3 {
     color: var(--primary-blue);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
 }
 
-.mission-box h3 i {
+.mission-card h3 i {
     color: var(--accent-teal);
     margin-right: 10px;
 }
 
-.mission-box p {
-    margin-bottom: 2rem;
-}
-
-.mission-box p:last-child {
+.mission-card p {
     margin-bottom: 0;
+    color: var(--text-dark);
+    line-height: 1.6;
 }
 
 /* Leadership page — leader row */
@@ -721,16 +744,29 @@ footer {
         position: absolute;
         top: 80px; /* matches header height */
         left: 0;
-        width: 100vw; /* full viewport screen width */
-        background-color: rgba(255, 255, 255, 0.98); /* clean, high-contrast solid/glass hybrid */
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        width: 100vw;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 2.5rem 0;
-        box-shadow: 0 15px 30px rgba(10, 25, 47, 0.15);
-        gap: 1.5rem;
-        border-bottom: 2px solid var(--border-color);
+        padding: 3rem 0;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        gap: 1.8rem;
+        border-bottom: 1px solid rgba(0, 168, 150, 0.15);
         z-index: 999;
+        
+        /* Smooth Entrance */
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
     }
 
     .nav-links li {
@@ -739,19 +775,17 @@ footer {
     }
 
     .nav-links a {
-        display: block;
-        width: 100%;
-        padding: 0.5rem 0;
-        font-size: 1.15rem;
+        display: inline-block;
+        width: auto;
+        padding: 0.5rem 0.2rem;
+        font-size: 1.3rem;
+        color: var(--text-dark);
+        letter-spacing: 0.5px;
     }
 
     .nav-links a.active {
         color: var(--accent-teal);
         font-weight: 600;
-    }
-
-    .nav-links.active {
-        display: flex;
     }
 
     .mobile-menu-btn {
@@ -1161,6 +1195,93 @@ footer {
         pointer-events: none;
         z-index: 1;
     }
+}
+
+/* Additional Page Styles (About Us & Inner Pages) */
+.page-banner {
+    background-color: var(--bg-gray);
+    padding: 6rem 0 3rem;
+    text-align: center;
+}
+
+.page-banner .section-title::after {
+    display: none; /* Removed big ass line from below page name */
+}
+
+.page-banner p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.about-overview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.about-overview-text {
+    flex: 1.2;
+    min-width: 300px;
+}
+
+.about-overview-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-blue);
+}
+
+.about-overview-text p {
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.mission-vision-wrapper {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mission-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color); /* exact homepage card border */
+    border-left: 4px solid var(--accent-teal); /* keep brand accent bar */
+    padding: 2.2rem;
+    border-radius: 8px; /* exact homepage card border-radius */
+    box-shadow: var(--shadow-md); /* exact homepage card shadow! */
+    transition: var(--transition);
+}
+
+.mission-card:hover {
+    transform: translateY(-10px); /* exact homepage card hover translation! */
+    border-color: var(--accent-teal); /* exact hover border-color */
+    box-shadow: var(--shadow-lg); /* exact homepage card hover shadow! */
+}
+
+
+.mission-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary-blue);
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.mission-card h3 i {
+    color: var(--accent-teal);
+    font-size: 1.20rem;
+}
+
+.mission-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 
