@@ -846,6 +846,20 @@ footer {
     .footer-col:nth-child(2) {
         justify-self: start;
     }
+
+    /* Fix leadership page overflow on mobile */
+    .leader-row {
+        gap: 1.5rem;
+    }
+
+    .leader-photo, .leader-bio {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .card {
+        padding: 1.25rem; /* reduce padding slightly on mobile to prevent squishing */
+    }
 }
 
 /* Animations */
